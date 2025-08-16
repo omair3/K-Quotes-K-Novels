@@ -38,3 +38,16 @@ Quotes ↔ Moods
 🎭 Why I built it
 
 Just practicing with MVC + EF Core while keeping it fun with K-content. The Explore page idea came from trying to link “moods” of quotes with “genres” of novels.
+## 🔐 Admin-only (Finale)
+- Admin login (cookie-based): protects Create/Edit/Delete + link/unlink actions.
+- Public can browse and use the Explore page.
+
+## 🖼️ Extra Feature #1: Image Upload
+- Novels & Dramas support cover images (jpg/png, 2MB max).
+- Stored under `/wwwroot/uploads`.
+
+
+## 📝 Notes
+- Minimal, student-style code (no heavy libraries).
+- Based on class patterns (controllers + views + viewmodels + EF relationships).
+
