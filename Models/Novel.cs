@@ -10,6 +10,8 @@ namespace KQuotesNovels.Models
         public List<NovelGenre> NovelGenres { get; set; } = new();
         public List<NovelDrama> NovelDramas { get; set; } = new();
         public List<NovelQuote> NovelQuotes { get; set; } = new();
+        public string? ImagePath { get; set; }
+
     }
 }
 

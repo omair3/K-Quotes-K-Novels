@@ -1,23 +1,43 @@
-@model IEnumerable<Novel>
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <h2>Novels</h2>
-  <a class="btn btn-primary" asp-action="Create">Create</a>
-</div>
-<table class="table table-striped">
-  <thead><tr><th>ID</th><th>Title</th><th>Author</th><th></th></tr></thead>
-  <tbody>
-@foreach (var item in Model) {
-  <tr>
-    <td>@item.NovelId</td>
-    <td>@item.Title</td>
-    <td>@item.Author?.Name</td>
-    <td>
-      <a class="btn btn-sm btn-secondary" asp-action="Details" asp-route-id="@item.NovelId">Details</a>
-      <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@item.NovelId">Edit</a>
-      <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.NovelId">Delete</a>
-    </td>
-  </tr>
-}
-  </tbody>
-</table>
+@model IEnumerable<KQuotesNovels.Models.Novel>
 
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Novels</h2>
+    <a class="btn btn-primary" asp-action="Create">Create</a>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Cover</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.NovelId</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.ImagePath))
+                    {
+                        <img src="@item.ImagePath" alt="Cover Image" style="max-width:80px;" />
+                    }
+                    else
+                    {
+                        <span class="text-muted">No image</span>
+                    }
+                </td>
+                <td>@item.Title</td>
+                <td>@item.Author?.Name</td>
+                <td>
+                    <a class="btn btn-sm btn-secondary" asp-action="Details" asp-route-id="@item.NovelId">Details</a>
+                    <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@item.NovelId">Edit</a>
+                    <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.NovelId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,60 +1,88 @@
-@model Novel
+@model KQuotesNovels.Models.Novel
 @using Microsoft.AspNetCore.Mvc.Rendering
-<h2>Novel Details</h2>
-<dl class="row">
-  <dt class="col-sm-2">ID</dt><dd class="col-sm-10">@Model.NovelId</dd>
-  <dt class="col-sm-2">Title</dt><dd class="col-sm-10">@Model.Title</dd>
-  <dt class="col-sm-2">Author</dt><dd class="col-sm-10">@Model.Author?.Name</dd>
-</dl>
-<div class="row">
-  <div class="col-md-6">
-    <h4>Genres</h4>
-    <ul>
-      @foreach (var g in Model.NovelGenres.Select(ng => ng.Genre)) {
-        <li>@g!.Name
-          <form method="post" asp-action="RemoveGenre" class="d-inline">
-            <input type="hidden" name="id" value="@Model.NovelId" />
-            <input type="hidden" name="genreId" value="@g.GenreId" />
-            <button class="btn btn-sm btn-outline-danger">remove</button>
-          </form>
-        </li>
-      }
-    </ul>
-    <form method="post" asp-action="AddGenre" class="d-flex gap-2">
-      <input type="hidden" name="id" value="@Model.NovelId" />
-      <select name="genreId" class="form-select" asp-items="ViewBag.GenreId"></select>
-      <button class="btn btn-sm btn-primary">Add</button>
-    </form>
-  </div>
-  <div class="col-md-6">
-    <h4>Dramas</h4>
-    <ul>
-      @foreach (var d in Model.NovelDramas.Select(nd => nd.Drama)) {
-        <li>@d!.Title
-          <form method="post" asp-action="RemoveDrama" class="d-inline">
-            <input type="hidden" name="id" value="@Model.NovelId" />
-            <input type="hidden" name="dramaId" value="@d.DramaId" />
-            <button class="btn btn-sm btn-outline-danger">remove</button>
-          </form>
-        </li>
-      }
-    </ul>
-    <form method="post" asp-action="AddDrama" class="d-flex gap-2">
-      <input type="hidden" name="id" value="@Model.NovelId" />
-      <select name="dramaId" class="form-select" asp-items="ViewBag.DramaId"></select>
-      <button class="btn btn-sm btn-primary">Add</button>
-    </form>
-  </div>
-</div>
-@if (ViewBag.SimilarQuotes != null) {
-  <div class="mt-4">
-    <h4>Similar Quotes (matching Genre ↔ Mood)</h4>
-    <ul>
-      @foreach (var q in ViewBag.SimilarQuotes) {
-        <li>"@q.Text" — <em>@q.Drama.Title</em></li>
-      }
-    </ul>
-  </div>
-}
-<a class="btn btn-secondary mt-3" asp-action="Index">Back</a>
 
+<h2>Novel Details</h2>
+
+<dl class="row">
+    <dt class="col-sm-2">ID</dt>
+    <dd class="col-sm-10">@Model.NovelId</dd>
+
+    <dt class="col-sm-2">Title</dt>
+    <dd class="col-sm-10">@Model.Title</dd>
+
+    <dt class="col-sm-2">Author</dt>
+    <dd class="col-sm-10">@Model.Author?.Name</dd>
+
+    <dt class="col-sm-2">Cover</dt>
+    <dd class="col-sm-10">
+        @if (!string.IsNullOrEmpty(Model.ImagePath))
+        {
+            <img src="@Model.ImagePath" alt="Cover Image" style="max-width:200px;" />
+        }
+        else
+        {
+            <span class="text-muted">No image</span>
+        }
+    </dd>
+</dl>
+
+<div class="row">
+    <div class="col-md-6">
+        <h4>Genres</h4>
+        <ul>
+            @foreach (var g in Model.NovelGenres.Select(ng => ng.Genre))
+            {
+                <li>
+                    @g!.Name
+                    <form method="post" asp-action="RemoveGenre" class="d-inline">
+                        <input type="hidden" name="id" value="@Model.NovelId" />
+                        <input type="hidden" name="genreId" value="@g.GenreId" />
+                        <button class="btn btn-sm btn-outline-danger">remove</button>
+                    </form>
+                </li>
+            }
+        </ul>
+        <form method="post" asp-action="AddGenre" class="d-flex gap-2">
+            <input type="hidden" name="id" value="@Model.NovelId" />
+            <select name="genreId" class="form-select" asp-items="ViewBag.GenreId"></select>
+            <button class="btn btn-sm btn-primary">Add</button>
+        </form>
+    </div>
+
+    <div class="col-md-6">
+        <h4>Dramas</h4>
+        <ul>
+            @foreach (var d in Model.NovelDramas.Select(nd => nd.Drama))
+            {
+                <li>
+                    @d!.Title
+                    <form method="post" asp-action="RemoveDrama" class="d-inline">
+                        <input type="hidden" name="id" value="@Model.NovelId" />
+                        <input type="hidden" name="dramaId" value="@d.DramaId" />
+                        <button class="btn btn-sm btn-outline-danger">remove</button>
+                    </form>
+                </li>
+            }
+        </ul>
+        <form method="post" asp-action="AddDrama" class="d-flex gap-2">
+            <input type="hidden" name="id" value="@Model.NovelId" />
+            <select name="dramaId" class="form-select" asp-items="ViewBag.DramaId"></select>
+            <button class="btn btn-sm btn-primary">Add</button>
+        </form>
+    </div>
+</div>
+
+@if (ViewBag.SimilarQuotes != null)
+{
+    <div class="mt-4">
+        <h4>Similar Quotes (matching Genre ↔ Mood)</h4>
+        <ul>
+            @foreach (var q in ViewBag.SimilarQuotes)
+            {
+                <li>"@q.Text" — <em>@q.Drama.Title</em></li>
+            }
+        </ul>
+    </div>
+}
+
+<a class="btn btn-secondary mt-3" asp-action="Index">Back</a>

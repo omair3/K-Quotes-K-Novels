@@ -13,5 +13,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.7" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="NewFolder\" />
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
 </Project>
 
