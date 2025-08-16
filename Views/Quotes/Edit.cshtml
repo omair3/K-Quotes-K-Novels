@@ -1,0 +1,21 @@
+@model KQuotesNovels.ViewModels.QuoteFormVM
+<h2>Edit Quote</h2>
+<form method="post">
+  <input type="hidden" asp-for="QuoteId" />
+  <div class="mb-3">
+    <label asp-for="Text" class="form-label"></label>
+    <input asp-for="Text" class="form-control" />
+    <span asp-validation-for="Text" class="text-danger"></span>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Drama</label>
+    <select asp-for="DramaId" class="form-select" asp-items="@(new SelectList(Model.AllDramas, "DramaId", "Title", Model.DramaId))"></select>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Moods (multi-select)</label>
+    <select asp-for="SelectedMoodIds" multiple class="form-select" asp-items="@(new MultiSelectList(Model.AllMoods, "MoodId", "Name", Model.SelectedMoodIds))"></select>
+  </div>
+  <button class="btn btn-primary">Save</button>
+  <a class="btn btn-secondary" asp-action="Index">Cancel</a>
+</form>
+

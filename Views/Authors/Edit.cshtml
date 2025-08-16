@@ -1,0 +1,13 @@
+@model Author
+<h2>Edit Author</h2>
+<form method="post">
+  <input type="hidden" asp-for="AuthorId" />
+  <div class="mb-3">
+    <label asp-for="Name" class="form-label"></label>
+    <input asp-for="Name" class="form-control" />
+    <span asp-validation-for="Name" class="text-danger"></span>
+  </div>
+  <button class="btn btn-primary">Save</button>
+  <a class="btn btn-secondary" asp-action="Index">Cancel</a>
+</form>
+

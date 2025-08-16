@@ -1,0 +1,39 @@
+@{
+  var tags = (IEnumerable<string>)ViewBag.Tags;
+  string selected = ViewBag.SelectedTag as string;
+}
+<div class="p-3 bg-white shadow-sm rounded">
+  <h2 class="h4">Explore</h2>
+  <form method="get" class="d-flex gap-2 mb-3">
+    <select name="tag" class="form-select">
+      <option value="">-- pick a tag --</option>
+      @foreach (var t in tags) {
+        <option value="@t" selected="@(t==selected)">@t</option>
+      }
+    </select>
+    <button class="btn btn-primary">Show</button>
+  </form>
+
+  @if (!string.IsNullOrWhiteSpace(selected)) {
+    <h5>Tag: @selected</h5>
+    <div class="row">
+      <div class="col-md-6">
+        <h6>Novels with Genre "@selected"</h6>
+        <ul>
+          @foreach (var n in (IEnumerable<Novel>)ViewBag.Novels) {
+            <li>@n.Title — <em>@n.Author?.Name</em></li>
+          }
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <h6>Quotes with Mood "@selected"</h6>
+        <ul>
+          @foreach (var q in (IEnumerable<Quote>)ViewBag.Quotes) {
+            <li>"@q.Text" — <em>@q.Drama.Title</em></li>
+          }
+        </ul>
+      </div>
+    </div>
+  }
+</div>
+

@@ -1,0 +1,9 @@
+@model Novel
+<h2>Delete Novel</h2>
+<form method="post">
+  <p>Delete <strong>@Model.Title</strong>?</p>
+  <input type="hidden" name="NovelId" value="@Model.NovelId" />
+  <button class="btn btn-danger">Delete</button>
+  <a class="btn btn-secondary" asp-action="Index">Cancel</a>
+</form>
+
