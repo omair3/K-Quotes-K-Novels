@@ -1,0 +1,10 @@
+echo ".vs/
+bin/
+obj/
+*.user
+*.suo
+*.dll
+*.exe
+*.pdb
+*.cache
+*.json" > .gitignore && git add Controllers Models Views Migrations wwwroot Program.cs KQuotesNovels.csproj appsettings.json .gitignore && git commit -m "Added AuthController (login/logout), NovelFormVM updates, image upload feature, and layout fixes" && git push
